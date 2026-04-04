@@ -10,9 +10,90 @@
 <body>
 <tw-story><noscript><tw-noscript>JavaScript needs to be enabled to play Working E-lit.</tw-noscript></noscript></tw-story>
 <tw-storydata name="Working E-lit" startnode="1" creator="Twine" creator-version="2.11.1" format="Harlowe" format-version="3.3.9" ifid="C4953C17-4774-4E8D-845C-3829DADEF467" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">tw-sidebar { display: none; }
-</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="GP" tags="" position="775,350" size="100,100">The percussive ticks of a wall-clock. The sharp clicks of a pen. The doctor looks up from his notepad and addresses you. He stares through you before finally settling on your eyes.
+
+@import url('https://fonts.googleapis.com/css2?family=Homemade+Apple&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
+
+tw-story {
+  font-family: "Instrument Serif", serif;
+  font-weight: 400;
+  font-style: normal;
+  color: #FFF;
+  background-color: #000;
+}
+
+.story-image {
+  width: 100%;
+}
+
+tw-link, tw-link:link, tw-link:visited, tw-link.visited {
+  color: purple;
+  text-decoration: underline;
+}
+tw-link:focus, tw-link:hover, tw-link:active, tw-link.visited:hover {
+  color: white;
+  text-decoration: none;
+}
+tw-passage {
+  padding-bottom: 200px;}
+
+img {  /* this selects all image (img) elements */
+  width: 100%;
+}
+.story-image-smaller {  /* this selects all elements with the story-image-smaller class not just images */
+  width: 50%;
+}
+img.story-image-smallest {  /* this selects all images with the story-image-smallest class */
+  width: 25%;
+}
+.story-room {
+  display: grid;  /* sets the display to grid on the surrounding div */
+  grid-template-columns: 50% 50%;  /* sets each column to 50% */
+}
+.story-text {
+  grid-column: 1;  /* sets which column the text appears in */
+  grid-row: 1;
+  box-sizing: border-box;
+  padding: 10px;
+}
+.story-image {
+  grid-column: 2;  /* sets which column the image appears in */
+  grid-row: 1;
+}
+.story-image img {
+max-width: 100%;
+height: auto;
+display: block;
+}
+tw-story[tags~="example-background"] {  /* the tag added in step 2 */
+  background-image: url(./images/example.jpg);  /* the image added in step 1 */
+  background-size: cover;  /* cover the whole element */
+  background-repeat: no-repeat;  /* do not repeat the background image */
+}
+tw-story[tags~="example-background"] {
+  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(./images/example.jpg) center center / cover no-repeat fixed;
+}</style><script role="script" id="twine-user-script" type="text/twine-javascript">window.onload = function () {
+    if (!document.getElementById("bg-music")) {
+        var audio = document.createElement("audio");
+        audio.id = "bg-music";
+        audio.loop = true;
+        audio.autoplay = true;
+        audio.volume = 0.5;
+        audio.setAttribute("preload", "auto");
+
+        var source = document.createElement("source");
+        source.src = "./audio/test.mp3";
+        source.type = "audio/mpeg";
+
+        audio.appendChild(source);
+        document.body.appendChild(audio);
+    }
+};</script><tw-passagedata pid="1" name="GP" tags="" position="775,350" size="100,100">The percussive ticks of a wall-clock. The sharp clicks of a pen. The doctor looks up from his notepad and addresses you. He stares through you before finally settling on your eyes.
 &quot;Are you taking your [[medication]]?&quot; he asks.
-Do you tell him the [[truth]]? or do you lie and say [[you have]].</tw-passagedata><tw-passagedata pid="2" name="medication" tags="" position="775,475" size="100,100"></tw-passagedata><tw-passagedata pid="3" name="truth" tags="" position="900,475" size="100,100"></tw-passagedata><tw-passagedata pid="4" name="you have" tags="" position="650,475" size="100,100"></tw-passagedata></tw-storydata>
+Do you tell him the [[truth]]? or do you [[lie]] and say you have.
+
+&lt;audio src=&quot;./audio/clock.mp3&quot; autoplay loop&gt;&lt;/audio&gt;</tw-passagedata><tw-passagedata pid="2" name="medication" tags="" position="775,475" size="100,100"></tw-passagedata><tw-passagedata pid="3" name="truth" tags="" position="900,475" size="100,100"></tw-passagedata><tw-passagedata pid="4" name="lie" tags="" position="650,475" size="100,100"></tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">(function(){"use strict";
 var require,define;!function(){var e={},r={};require=function(i){var n=e[i];return n&&(r[i]=n[1].apply(void 0,n[0].map(require)),e[i]=void 0),r[i]},(define=function(r,i,n){if("function"==typeof r)return r();e[r]=[i,n]}).amd=!0}();/*!
  * https://github.com/paulmillr/es6-shim
