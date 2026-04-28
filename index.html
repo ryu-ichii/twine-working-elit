@@ -142,7 +142,8 @@ He nods in response.
 You nod.
 
 
-Do you [[accept]] or [[refuse]]. 
+Do you [[accept]] the new pills or [[continue]] with the old ones. 
+Or you can [[leave]] the appointment altogether.
 </tw-passagedata><tw-passagedata pid="4" name="lie" tags="GP2" position="600,675" size="100,100">&quot;I... I... I&#39;ve been taking it... everyday, like you said&quot; you manage to dribble out sheepishly.
 
 The doctor seems to smirk in response. You can see him making calculations from your movements and figuring you out. 
@@ -151,30 +152,34 @@ He sighs.
 
 &quot;Lets try this again...&quot;
 
-Do you [[leave]] or [[double down]]. 
-</tw-passagedata><tw-passagedata pid="5" name="Alternate internalisation" tags="blue" position="1125,625" size="100,100">Continue [[Dissociation]]</tw-passagedata><tw-passagedata pid="6" name="hal.tracks" tags="" position="550,300" size="100,100">background: ./audio/background.mp3
+You look at the door. You can [[leave]] or [[double down]]. 
+</tw-passagedata><tw-passagedata pid="5" name="Alternate internalisation" tags="blue" position="1125,625" size="100,100">The doctors coughs somewhere in the background.
+&quot;Hello? Are you there?&quot; he asks from another galaxy.
+You can&#39;t find the words to answer. The language. 
+Do you want to  [[Ignore]] the situation and continue floating away or attempt to [[leave]] the building altogether.</tw-passagedata><tw-passagedata pid="6" name="hal.tracks" tags="" position="550,300" size="100,100">background: ./audio/background.mp3
 clock: ./audio/clock.mp3
 crickets: ./audio/crickets.mp3
 psychobirds: ./audio/psychosisbirds.mp3
 printer: ./audio/printer.mp3
 </tw-passagedata><tw-passagedata pid="7" name="hal.config" tags="" position="450,300" size="100,100">showControls: false
 
-</tw-passagedata><tw-passagedata pid="8" name="Start Menu" tags="waitingroom" position="750,300" size="100,100">Hello and welcome to the waiting area.
+</tw-passagedata><tw-passagedata pid="8" name="Start Menu" tags="waitingroom" position="750,300" size="100,100">Welcome to the waiting area.
 
-The  room is dusty, bright and smells of ammonia.
+The room is dusty, bright and smells of ammonia.
 Your palms are a bit wet but you should proceed into your appointment shortly.
 
-[[GP&lt;-Begin Your Appointment.]]
-
-Please get comfortable.</tw-passagedata><tw-passagedata pid="9" name="accept" tags="" position="825,900" size="100,100"></tw-passagedata><tw-passagedata pid="10" name="refuse" tags="" position="1025,900" size="100,100"></tw-passagedata><tw-passagedata pid="11" name="leave" tags="parkinglot" position="500,825" size="100,100">You stagger out of the building in a hurry. The sunlight flicks off the 3M carpark lines and blinds you. It&#39;s so hot, you can barely think.
+[[GP&lt;-Begin Your Appointment.]]</tw-passagedata><tw-passagedata pid="9" name="accept" tags="" position="825,925" size="100,100"></tw-passagedata><tw-passagedata pid="10" name="leave" tags="parkinglot" position="500,825" size="100,100">You stagger out of the building in a hurry. The sunlight flicks off the 3M carpark lines and blinds you. It&#39;s so hot, you can barely think.
 
 You should get a drink and sit in the [[park]] for a while.
 
-(track: &#39;clock&#39;, &#39;stop&#39;)</tw-passagedata><tw-passagedata pid="12" name="double down" tags="GP" position="675,825" size="100,100">&quot;Look,&quot; he says, &quot;Let&#39;s just try you on something else&quot;. 
-He types and clicks on  on a computer and the printer whirs. 
+(track: &#39;clock&#39;, &#39;stop&#39;)</tw-passagedata><tw-passagedata pid="11" name="double down" tags="GP" position="675,825" size="100,100">&quot;Look,&quot; he says, &quot;Let&#39;s just try you on something else&quot;. 
+He types and clicks on a computer and the printer whirs.
+He retrieves a prescription sheet and passes it you.
+Do you [[accept]] or 
 
-(track: &#39;printer&#39;, &#39;seek&#39;, 5)</tw-passagedata><tw-passagedata pid="13" name="startup" tags="startup" position="350,300" size="100,100"></tw-passagedata><tw-passagedata pid="14" name="Dissociation" tags="" position="1225,750" size="100,100">[[Ignore]] the situation and continue floating.
-[[leave&lt;-Try return to the present.]]</tw-passagedata><tw-passagedata pid="15" name="Ignore" tags="" position="1225,875" size="100,100"></tw-passagedata><tw-passagedata pid="16" name="park" tags="" position="400,975" size="100,100">Do you [[talk]] or [[ignore]] him and go home.</tw-passagedata><tw-passagedata pid="17" name="talk" tags="" position="325,1100" size="100,100">|smooth&gt;[sfddfhdf. dfhdf, eer? fuckhead. Shit.dfdf]</tw-passagedata><tw-passagedata pid="18" name="ignore" tags="" position="525,1100" size="100,100"></tw-passagedata></tw-storydata>
+(track: &#39;printer&#39;, &#39;seek&#39;, 5)</tw-passagedata><tw-passagedata pid="12" name="startup" tags="startup" position="350,300" size="100,100"></tw-passagedata><tw-passagedata pid="13" name="Ignore" tags="" position="1225,875" size="100,100"></tw-passagedata><tw-passagedata pid="14" name="park" tags="" position="400,975" size="100,100">Do you [[talk]] or [[ignore]] him and go home.</tw-passagedata><tw-passagedata pid="15" name="talk" tags="" position="325,1100" size="100,100">|smooth&gt;[sfddfhdf. dfhdf, eer? fuckhead. Shit.dfdf]
+
+(track: &#39;psychobirds&#39;, &#39;play&#39;)</tw-passagedata><tw-passagedata pid="16" name="ignore" tags="" position="525,1100" size="100,100"></tw-passagedata><tw-passagedata pid="17" name="continue" tags="" position="1000,925" size="100,100"></tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">(function(){"use strict";
 var require,define;!function(){var e={},r={};require=function(i){var n=e[i];return n&&(r[i]=n[1].apply(void 0,n[0].map(require)),e[i]=void 0),r[i]},(define=function(r,i,n){if("function"==typeof r)return r();e[r]=[i,n]}).amd=!0}();/*!
  * https://github.com/paulmillr/es6-shim
