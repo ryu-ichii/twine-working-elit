@@ -59,12 +59,22 @@ tw-story[tags~="breakdownfont"] {
   font-family: "VT323", monospace;
   font-weight: 400;
   font-style: normal;
+  font-size: 2.5em;
   color: red;
   background-color: #000;
+  animation: colorflicker 0.3s steps(1) infinite;
+}
+
+@keyframes colorflicker {
+  0%   { color: red; }
+  25%  { color: cyan; }
+  50%  { color: yellow; }
+  75%  { color: magenta; }
+  100% { color: red; }
 }
 
 tw-link, tw-link:link {
-  color: green;
+  color: #4fc3f7;
   text-decoration: underline;
 }
 tw-link:visited, tw-link.visited {
@@ -133,20 +143,17 @@ tw-story[tags~="blue"] {
 tw-hook[name="smooth1"] {
   display: inline-block;
   position: absolute;
-  animation: wander 10s linear infinite;
-  animation-delay: 0s;
+  animation: wander1 7s linear infinite;
 }
 tw-hook[name="smooth2"] {
   display: inline-block;
   position: absolute;
-  animation: wander 10s linear infinite;
-  animation-delay: -3.3s;
+  animation: wander2 4.5s linear infinite;
 }
 tw-hook[name="smooth3"] {
   display: inline-block;
   position: absolute;
-  animation: wander 10s linear infinite;
-  animation-delay: -6.6s;
+  animation: wander3 6s linear infinite;
 }
 tw-story[tags~="insanity"] {  /* the tag added in step 2 */
   background-image: url(./images/insanity.gif);  /* the image added in step 1 */
@@ -158,13 +165,40 @@ tw-story[tags~="static"] {  /* the tag added in step 2 */
   background-size: cover;  /* cover the whole element */
   background-repeat: no-repeat;  /* do not repeat the background image */
 }
+tw-story[tags~="parkbench"] {  /* the tag added in step 2 */
+  background-image: url(./images/parkbench.jpg);  /* the image added in step 1 */
+  background-size: cover;  /* cover the whole element */
+  background-repeat: no-repeat;  /* do not repeat the background image */
+}
 
-@keyframes wander {
-  0%   { top: 10%; left: 10%; }
-  25%  { top: 50%; left: 80%; }
-  50%  { top: 80%; left: 20%; }
-  75%  { top: 20%; left: 60%; }
-  100% { top: 10%; left: 10%; }
+@keyframes wander1 {
+  0%   { top: 5%;  left: 5%; }
+  15%  { top: 70%; left: 85%; }
+  30%  { top: 20%; left: 40%; }
+  45%  { top: 85%; left: 10%; }
+  60%  { top: 10%; left: 75%; }
+  75%  { top: 60%; left: 55%; }
+  90%  { top: 40%; left: 20%; }
+  100% { top: 5%;  left: 5%; }
+}
+@keyframes wander2 {
+  0%   { top: 80%; left: 60%; }
+  12%  { top: 10%; left: 90%; }
+  25%  { top: 55%; left: 15%; }
+  37%  { top: 5%;  left: 50%; }
+  50%  { top: 75%; left: 80%; }
+  62%  { top: 30%; left: 5%; }
+  75%  { top: 90%; left: 40%; }
+  87%  { top: 15%; left: 70%; }
+  100% { top: 80%; left: 60%; }
+}
+@keyframes wander3 {
+  0%   { top: 40%; left: 30%; }
+  20%  { top: 5%;  left: 80%; }
+  40%  { top: 90%; left: 50%; }
+  60%  { top: 25%; left: 10%; }
+  80%  { top: 65%; left: 90%; }
+  100% { top: 40%; left: 30%; }
 }
 
 /**
@@ -257,10 +291,19 @@ tw-story[tags~="static"] {  /* the tag added in step 2 */
       clearTimeout(timer);
       timer = setTimeout(function() {
         scramble(p);
+        try {
+          var story = document.querySelector('tw-story');
+          var tags = story ? (story.getAttribute('tags') || '') : '';
+          if (tags.indexOf('clockroom') !== -1) {
+            if (!A.track('clock').isPlaying()) A.track('clock').play();
+          } else {
+            A.track('clock').stop();
+          }
+        } catch(e) {}
       }, 200);
     }
   }).observe(document.documentElement, { childList: true, subtree: true });
-})();</script><tw-tag name="hal.tracks" color="purple"></tw-tag><tw-tag name="startup" color="yellow"></tw-tag><tw-tag name="waiting-background" color="orange"></tw-tag><tw-tag name="waitingroom" color="green"></tw-tag><tw-tag name="parkinglot" color="red"></tw-tag><tw-tag name="GP" color="green"></tw-tag><tw-tag name="GP2" color="blue"></tw-tag><tw-tag name="blue" color="yellow"></tw-tag><tw-tag name="smooth" color="purple"></tw-tag><tw-tag name="insanity" color="green"></tw-tag><tw-tag name="breakdownfont" color="purple"></tw-tag><tw-tag name="static" color="purple"></tw-tag><tw-passagedata pid="1" name="GP" tags="GP" position="100,100" size="100,100">The resonant ticks. 
+})();</script><tw-tag name="hal.tracks" color="purple"></tw-tag><tw-tag name="startup" color="yellow"></tw-tag><tw-tag name="waiting-background" color="orange"></tw-tag><tw-tag name="waitingroom" color="green"></tw-tag><tw-tag name="parkinglot" color="red"></tw-tag><tw-tag name="GP" color="green"></tw-tag><tw-tag name="GP2" color="blue"></tw-tag><tw-tag name="blue" color="yellow"></tw-tag><tw-tag name="smooth" color="purple"></tw-tag><tw-tag name="insanity" color="green"></tw-tag><tw-tag name="breakdownfont" color="purple"></tw-tag><tw-tag name="static" color="purple"></tw-tag><tw-tag name="parkbench" color="blue"></tw-tag><tw-passagedata pid="1" name="GP" tags="GP clockroom" position="775,200" size="100,100">The resonant ticks. 
 The piercing clicks of a pen. 
 
 The doctor looks up from his notepad to address you. He stares through you for a moment before finally settling on your dry and irritated eyes. The doctor seems a little put off by your appearance today. You should feel a hint of shame. 
@@ -269,34 +312,30 @@ The doctor looks up from his notepad to address you. He stares through you for a
 
 Do you want to tell him the [[truth]] or would rather [[lie]] and pretend that you have been?
 
-(track: &#x27;clock&#x27;, &#x27;play&#x27;)
 {
-(track: &#x27;background&#x27;, &#x27;loop&#x27;, true)
-(track: &#x27;background&#x27;, &#x27;playwhenpossible&#x27;)
-}</tw-passagedata>
-<tw-passagedata pid="2" name="medication" tags="blue" position="100,100" size="100,100">You were prescribed Escitalopram 20mg. You were supposed to take them daily but have failed to do so. You&#x27;re not quite sure why you didn&#x27;t take it. It&#x27;s not like you were scared or anything. You&#x27;re not very sure of anything to be fair. 
+(track: &#39;background&#39;, &#39;loop&#39;, true)
+(track: &#39;background&#39;, &#39;playwhenpossible&#39;)
+}</tw-passagedata><tw-passagedata pid="2" name="medication" tags="blue" position="950,175" size="100,100">You were prescribed Escitalopram 20mg. You were supposed to take them daily but have failed to do so. You&#39;re not quite sure why you didn&#39;t take it. It&#39;s not like you were scared or anything. You&#39;re not very sure of anything to be fair. 
 
 &lt;img class=&quot;story-image-smaller&quot; src=&quot;./images/meds.jpg&quot; alt=&quot;medication&quot;.&gt;
 
-Or maybe you do know but you&#x27;re not willing to face the truth.
+Or maybe you do know but you&#39;re not willing to face the truth.
 
 [[GP&lt;-Go back and answer the question.]]
 or
-[[Alternate internalisation&lt;-Reflect on your reasons for not taking it.]]</tw-passagedata>
-<tw-passagedata pid="3" name="truth" tags="GP2" position="100,100" size="100,100">&quot;I don&#x27;t like how it makes me feel. I had to stop&quot; you tell the doctor. 
+[[Alternate internalisation&lt;-Reflect on your reasons for not taking it.]]</tw-passagedata><tw-passagedata pid="3" name="truth" tags="GP2 clockroom" position="850,350" size="100,100">&quot;I don&#39;t like how it makes me feel. I had to stop&quot; you tell the doctor. 
 
 He nods in response.
-It&#x27;s humiliating but noble that you would admit that.
+It&#39;s humiliating but noble that you would admit that.
 
-&quot;Well. I guess, let&#x27;s try something else then.&quot;
+&quot;Well. I guess, let&#39;s try something else then.&quot;
 
 You nod but do you actually agree?
 
 
 Do you [[accept]] the offer of new pills or [[try again]] with the old ones. 
 
-Or if you&#x27;re feeling brash, you could [[leave]] the appointment altogether.</tw-passagedata>
-<tw-passagedata pid="4" name="lie" tags="GP2" position="100,100" size="100,100">&quot;I... I... I&#x27;ve been taking it... everyday, like you said&quot; 
+Or if you&#39;re feeling brash, you could [[leave]] the appointment altogether.</tw-passagedata><tw-passagedata pid="4" name="lie" tags="GP2 clockroom" position="700,350" size="100,100">&quot;I... I... I&#39;ve been taking it... everyday, like you said&quot; 
 you manage to dribble out.
 
 You sound like a bit of a fool. 
@@ -307,18 +346,14 @@ He sighs.
 
 &quot;Lets try this again...&quot;
 
-You look at the door. You could [[leave]] the appointment now or [[double down]] and endure the nightmare.</tw-passagedata>
-<tw-passagedata pid="5" name="Alternate internalisation" tags="blue" position="100,100" size="100,100">The doctors coughs somewhere in the background.
+You look at the door. You could [[leave]] the appointment now or [[double down]] and endure the nightmare.</tw-passagedata><tw-passagedata pid="5" name="Alternate internalisation" tags="blue" position="1175,325" size="100,100">The doctors coughs somewhere in the background.
 &quot;Hello? Are you there?&quot; he asks from another galaxy.
-You can&#x27;t find the words to answer. The language. 
-Do you want to  [[Ignore]] the situation and continue floating away or attempt to [[leave]] the building altogether.</tw-passagedata>
-<tw-passagedata pid="6" name="hal.tracks" tags="" position="100,100" size="100,100">background: ./audio/background.mp3
+You can&#39;t find the words to answer. The language. 
+Do you want to  [[Ignore]] the situation and continue floating away or attempt to [[leave]] the building altogether.</tw-passagedata><tw-passagedata pid="6" name="hal.tracks" tags="" position="400,25" size="100,100">background: ./audio/background.mp3
 clock: ./audio/clock.mp3
 crickets: ./audio/crickets.mp3
 psychobirds: ./audio/psychosisbirds.mp3
-printer: ./audio/printer.mp3</tw-passagedata>
-<tw-passagedata pid="7" name="hal.config" tags="" position="100,100" size="100,100">showControls: false</tw-passagedata>
-<tw-passagedata pid="8" name="Start Menu" tags="waitingroom" position="100,100" size="100,100">Welcome to the waiting area.
+printer: ./audio/printer.mp3</tw-passagedata><tw-passagedata pid="7" name="hal.config" tags="" position="500,25" size="100,100">showControls: false</tw-passagedata><tw-passagedata pid="8" name="Start Menu" tags="waitingroom" position="775,50" size="100,100">Welcome to the waiting area.
 
 The room is dusty, bright and smells of ammonia.
 Your palms are a bit wet but you should proceed into your appointment shortly.
@@ -326,14 +361,9 @@ You might want to turn your volume up so you can hear your appointment adequatel
 
 [[GP&lt;-Begin Your Appointment.]]
 
-&lt;div class=&quot;fullscreen-btn&quot;&gt;(link: &quot;Go Fullscreen&quot;)[&lt;script&gt;document.documentElement.requestFullscreen();&lt;/script&gt;]&lt;/div&gt;</tw-passagedata>
-<tw-passagedata pid="9" name="accept" tags="" position="100,100" size="100,100"></tw-passagedata>
-<tw-passagedata pid="10" name="leave" tags="parkinglot" position="100,100" size="100,100">You stagger out of the building in a hurry. The sunlight flicks off the 3M carpark lines and blinds you. It&#x27;s hot and bright. You can barely think.
+&lt;div class=&quot;fullscreen-btn&quot;&gt;(link: &quot;Go Fullscreen&quot;)[&lt;script&gt;document.documentElement.requestFullscreen();&lt;/script&gt;]&lt;/div&gt;</tw-passagedata><tw-passagedata pid="9" name="accept" tags="" position="825,575" size="100,100"></tw-passagedata><tw-passagedata pid="10" name="leave" tags="parkinglot" position="350,575" size="100,100">You stagger out of the building in a hurry. The sunlight flicks off the 3M carpark lines and blinds you. It&#39;s hot and bright. You can barely think.
 
-You should get a drink and sit in the [[park]] for a while.
-
-(track: &#x27;clock&#x27;, &#x27;stop&#x27;)</tw-passagedata>
-<tw-passagedata pid="11" name="double down" tags="GP" position="100,100" size="100,100">&quot;Yep. Just look,&quot; he says, &quot;Let&#x27;s just try you on something else then.&quot;
+You should get a drink and sit in the [[park]] for a while.</tw-passagedata><tw-passagedata pid="11" name="double down" tags="GP clockroom" position="625,525" size="100,100">&quot;Yep. Just look,&quot; he says, &quot;Let&#39;s just try you on something else then.&quot;
 
 He types into his computer and clicks something a few times.
 The printer groans into action.
@@ -341,12 +371,9 @@ He retrieves a prescription sheet and passes it you.
 
 &quot;Ok. Twice a day, morning and before bed.&quot;
 
-You&#x27;re backed into a corner here, it feels as if you must [[accept]].
+You&#39;re backed into a corner here, it feels as if you must [[accept]].
 
-(track: &#x27;printer&#x27;, &#x27;seek&#x27;, 5)</tw-passagedata>
-<tw-passagedata pid="12" name="startup" tags="startup" position="100,100" size="100,100"></tw-passagedata>
-<tw-passagedata pid="13" name="Ignore" tags="" position="100,100" size="100,100"></tw-passagedata>
-<tw-passagedata pid="14" name="park" tags="" position="100,100" size="100,100">You find a spot on a bench.
+(track: &#39;printer&#39;, &#39;seek&#39;, 5)</tw-passagedata><tw-passagedata pid="12" name="startup" tags="startup" position="300,25" size="100,100"></tw-passagedata><tw-passagedata pid="13" name="Ignore" tags="" position="1350,550" size="100,100"></tw-passagedata><tw-passagedata pid="14" name="park" tags="parkbench" position="300,700" size="100,100">You find a spot on a bench.
 
 Theres a strung out bloke stumbling through the playground making an incoherent string of guttural noises as he comes closer to you. 
 
@@ -354,19 +381,14 @@ His eyes meet yours as you sit there minding your business. These fucking brassi
 
 The man approaches you in search of conversation.
 
-Do you [[talk]] with the junkie or [[ignore]] him and head home.</tw-passagedata>
-<tw-passagedata pid="15" name="talk" tags="breakdownfont static" position="100,100" size="100,100">|smooth1&gt;[(either: &quot;What are you doing?&quot;, &quot;The fuck are you here for?&quot;, &quot;Are you ok?&quot;)]
+Do you [[talk]] with the junkie or [[ignore]] him and head home.</tw-passagedata><tw-passagedata pid="15" name="talk" tags="breakdownfont static" position="225,850" size="100,100">|smooth1&gt;[(either: &quot;What are you doing?&quot;, &quot;The fuck are you here for?&quot;, &quot;Are you ok?&quot;)]
 
 |smooth2&gt;[(either: &quot;You look retarded.&quot;, &quot;Shit fuck.&quot;, &quot;Wanna punch on?&quot;)]
 
 |smooth3&gt;[(either: &quot;Just like me.&quot;, &quot;Alone and afraid.&quot;, &quot;Needles. Government Psy-Op.&quot;)]
 
 
-(track: &#x27;psychobirds&#x27;, &#x27;play&#x27;)</tw-passagedata>
-<tw-passagedata pid="16" name="ignore" tags="" position="100,100" size="100,100"></tw-passagedata>
-<tw-passagedata pid="17" name="phone" tags="" position="100,100" size="100,100"></tw-passagedata>
-<tw-passagedata pid="18" name="try again" tags="" position="100,100" size="100,100"></tw-passagedata>
-</tw-storydata>
+(track: &#39;psychobirds&#39;, &#39;play&#39;)</tw-passagedata><tw-passagedata pid="16" name="ignore" tags="" position="450,750" size="100,100"></tw-passagedata><tw-passagedata pid="17" name="phone" tags="" position="1000,700" size="100,100"></tw-passagedata><tw-passagedata pid="18" name="try again" tags="" position="975,575" size="100,100"></tw-passagedata><tw-passagedata pid="19" name="Untitled Passage" tags="" position="1100,700" size="100,100"></tw-passagedata><tw-passagedata pid="20" name="Untitled Passage 1" tags="" position="1200,700" size="100,100"></tw-passagedata><tw-passagedata pid="21" name="Psych Ward" tags="" position="875,900" size="100,100"></tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">(function(){"use strict";
 var require,define;!function(){var e={},r={};require=function(i){var n=e[i];return n&&(r[i]=n[1].apply(void 0,n[0].map(require)),e[i]=void 0),r[i]},(define=function(r,i,n){if("function"==typeof r)return r();e[r]=[i,n]}).amd=!0}();/*!
  * https://github.com/paulmillr/es6-shim
